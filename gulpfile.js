@@ -11,7 +11,9 @@ uglify = require('gulp-uglify');
 function scriptsLibraries() {
 	return gulp.src([
 			'node_modules/jquery/dist/jquery.min.js',
-			'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'
+			'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
+			'node_modules/smooth-scroll/dist/smooth-scroll.min.js',
+			'node_modules/isotope-layout/dist/isotope.pkgd.min.js'
 		])
 		.pipe(gulp.dest('assets/js'))
 		.pipe(browserSync.stream());

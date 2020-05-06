@@ -1,0 +1,11 @@
+@mixin transitionIn {
+    transition: .3s all ease-in;
+}
+@mixin transitionOut {
+    transition: .3s all ease-out;
+}
+@mixin parallaxBackground {
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
