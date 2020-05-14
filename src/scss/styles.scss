@@ -215,13 +215,21 @@ label {
 .contact-form {
     @extend .col-12;
     @extend .col-sm-8;
-    button {
+    .submit-button {
         @extend .float-right;
         @extend .mt-3;
     }
 }
 .data {
     @extend .d-none;
+}
+.date {
+    @extend .font-italic;
+    @extend .position-absolute;
+    @include font-size($fontSize-xxxl);
+    color: $primaryColorTransparent;
+    top: 1rem;
+    right: 1.55rem;
 }
 .footer-slogan {
     @extend .text-center;
@@ -245,18 +253,17 @@ label {
     top: 90vh;
     z-index: 4;
 }
-.icon-circle {
-    @extend .far;
-    @extend .fa-dot-circle;
-}
+.icon-arrow,
 .icon-desktop,
+.icon-download,
 .icon-gamepad,
 .icon-mobile,
 .icon-pencil {
     @extend .fas;
 }
 .icon-github,
-.icon-linkedin {
+.icon-linkedin,
+.icon-youtube {
     @extend .fab;
     @include transitionIn;
     @include font-size($fontSize6);
@@ -266,6 +273,16 @@ label {
         @include transitionOut;
         color: $black;
     }
+}
+.icon-arrow {
+    @extend .fa-caret-right;
+}
+.icon-download {
+    @extend .fa-download;
+}
+.icon-circle {
+    @extend .far;
+    @extend .fa-dot-circle;
 }
 .icon-desktop {
     @extend .fa-desktop;
@@ -284,6 +301,9 @@ label {
 }
 .icon-pencil {
     @extend .fa-pencil-alt;
+}
+.icon-youtube {
+    @extend .fa-youtube;
 }
 .interest {
     @extend .col-sm-3; 
@@ -352,6 +372,8 @@ label {
     align-items: baseline;
     span {
         @include font-size($fontSize2);
+        margin-right: 2rem;
+        min-width: 9rem;
     }
     div {
         @extend .float-right;
@@ -483,20 +505,111 @@ label {
         transform: rotate(2deg);
     }
 }
+.techs {
+    font-family: monospace;
+    margin-bottom: 3rem;
+    max-width: 50rem;
+}
 .work-detail {
     align-items: center;
     background: rgba(0,0,0,.75);
     border-radius: 10px;
+    color: $utilColor1;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     margin: 0 15px;
-    padding: .5rem;
+    overflow: auto;
     position: fixed;
     transition: .3s all ease-in !important;
     transform: scale(1.05);
     z-index: 5;
+    p.description {
+        @include font-size($fontSize2);
+    }
+    figure {
+        margin: 2rem 0;
+        &.col3 {
+            @extend .col-md-3;
+            @extend .col-6;
+        }
+        &.col3var {
+            @extend .offset-md-0;
+            @extend .col-md-3;
+            @extend .offset-sm-3;
+            @extend .col-sm-6;
+            @extend .offset-2;
+            @extend .col-8;
+            padding: 0;
+        }
+        &.col6 {
+            @extend .col-md-6;
+            &:nth-child(odd) {
+                padding-left: 0;
+            }
+            &:nth-child(even) {
+                padding-right: 0;
+            }
+        } 
+        &.col12 {
+            @extend .col-12;
+        }
+        img {
+            width: 100%;
+        }
+        figcaption {
+            @extend .text-uppercase;
+            color: $utilColor1;
+            font-size: $fontSize-2;
+        }
+    }
+    ul {
+        @extend .list-unstyled;
+        @include font-size($fontSize1);
+        margin: 1.5rem 0;
+        li {
+            margin-bottom: $fontSize-3;
+        }
+        .icon-arrow {
+            margin-right: $fontSize-2;
+        }
+    }
+    .project-description,
+    .project-title {
+        width: 100%;
+    }
+    .buttons {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        a {
+            margin-left: 1rem;
+        }
+    }
+    .container {
+        padding-bottom: 4rem;
+    }
+    .icons {
+        padding: 0 0 1.5rem;
+        a {
+            margin-right: 1rem;
+        }
+        span {
+            @include font-size($fontSize6);
+            color: $primaryColor;
+            &:hover {
+                color: $secondaryColor;
+            }
+        }
+    }
+    .project-title {
+        @include font-size($fontSize1);
+        color: $primaryColor;
+    }
+    .row {
+        margin: 3rem 0;
+    }
 }
 .work-text {
     position: fixed;

@@ -4,7 +4,7 @@ cleanCSS = require('gulp-clean-css'),
 connect = require('gulp-connect-php'),
 gulp = require('gulp'),
 rename = require('gulp-rename'),
-sass = require('gulp-sass'),
+sass = require('gulp-dart-sass'),
 sourcemaps = require('gulp-sourcemaps'),
 uglify = require('gulp-uglify');
 
@@ -45,19 +45,21 @@ function scripts() {
 		.pipe(browserSync.stream());
 }
 
-function watch() {
-	browserSync.init({
-		server: {
-			baseDir: './'
-		}
+function serve() {
+	connect.server({}, function() {
+		browserSync.init({
+			baseDir: './',
+			proxy: 'http://dev.adri.info',
+			notify: false
+	  });
 	});
 	gulp.watch('src/scss/**/*.scss', styles);
 	gulp.watch('src/js/**/*.js', scriptsLibraries);
 	gulp.watch('src/js/**/*.js', scripts);
-	gulp.watch('./*.html').on('change', browserSync.reload);
+	gulp.watch('./*.php').on('change', browserSync.reload);
 }
 
 exports.scriptsLibraries = scriptsLibraries;
 exports.styles = styles;
 exports.scripts = scripts;
-exports.watch = watch;
+exports.serve = serve;

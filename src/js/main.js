@@ -44,6 +44,7 @@ $(function() {
         changeClass($(this));
     });
     $('.hover-text').click(function() {
+        var workId = $(this).parent().data('id');
         var container = $('<div class="work-detail"><div class="container"></div></div>');
         var title = $(this).find('h3').clone();
         var subtitle = $(this).find('p').clone();
@@ -77,7 +78,7 @@ $(function() {
             left: 0,
             height: '100vh',
             margin: 0,
-            padding: 0,
+            padding: '0',
             top: 0,
             width: '100%'
         }, function() {
@@ -94,7 +95,9 @@ $(function() {
                 width: '100%'
             }, 400);
             subtitle.delay(100).animate({
+                'font-size': '1.25rem',
                 left: $('#works .container').offset().left + 15,
+                'margin-bottom': '1.5rem',
                 top: '3.5em',
             }, 400, function() {
                 $('.work-detail .container').css({
@@ -103,6 +106,29 @@ $(function() {
                 }).append('<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>')
                     .append(title)
                     .append(subtitle);
+                
+                $.get('http://dev.adri.info/wp-json/wp/v2/works/' + workId)
+                    .done(function(data) {
+                        var workHtml = '<p class="date">' + data.ano + '</p><p class="techs">' + data.tecnologias + '</p>';
+                        var workIcons = data.download || data.youtube || data.github ? '<div class="icons"></div>' : '';
+                        var workButtons = '<div class="buttons"></div>';
+                        $('.work-detail .container').append(workIcons + workHtml + data.datos + workButtons);
+                        var workFooter = data.url ? '<a href="' + data.url + '" class="btn btn-dark" target="_blank">Visitar</a>' : '';
+                        var workBack = '<button id="back" class="btn btn-secondary">Volver</button>';
+                        $('.buttons').append(workBack + workFooter);
+                        if (workIcons != '') {
+                            var workYoutube = data.youtube ? '<a href="' + data.youtube + '" target="_blank" class="work-detail-action"><span class="icon-youtube"></span></a>' : '';
+                            var workGithub = data.github ? '<a href="' + data.github + '" target="_blank" class="work-detail-action"><span class="icon-github"></span></a>' : '';
+                            var workDownload = data.download ? '<a href="' + data.download + '" target="_blank" class="work-detail-action"><span class="icon-download"></span></a>' : '';
+                            $('.work-detail .container .icons').append(workYoutube + workGithub + workDownload);
+                        }
+                        $('#back').click(function() {
+                            $('.close').trigger('click');
+                        });
+                    })
+                    .fail(function(error) {
+                        console.log(error);
+                    });
                 $('.close').css({
                     color: 'white',
                     'font-size': '2.566rem',
