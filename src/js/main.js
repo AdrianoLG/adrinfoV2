@@ -7,6 +7,10 @@ $(function() {
     });
     var winHeight = $(window).height();
     var headerHeight = $('header').outerHeight();
+    var headerWidth = $('header').outerWidth();
+    if (headerWidth < 975) {
+        $('header').addClass('mobileMenu');
+    }
     $(window).scroll(function() {
         var navHeight = (winHeight / 10 * 3) - (headerHeight / 3) + 30;
         if (window.scrollY > navHeight) {
@@ -23,6 +27,12 @@ $(function() {
     $(window).resize(function() {
         winHeight = $(window).height();
         headerHeight = $('header').outerHeight();
+        headerWidth = $(window).width();
+        if (headerWidth < 975) {
+            $('header').addClass('mobileMenu');
+        } else {
+            $('header').removeClass('mobileMenu');
+        }
     });
     $('#goToPage').click(function() {
         $('header').addClass('on');
@@ -119,8 +129,18 @@ $(function() {
                         if (workIcons != '') {
                             var workYoutube = data.youtube ? '<a href="' + data.youtube + '" target="_blank" class="work-detail-action"><span class="icon-youtube"></span></a>' : '';
                             var workGithub = data.github ? '<a href="' + data.github + '" target="_blank" class="work-detail-action"><span class="icon-github"></span></a>' : '';
-                            var workDownload = data.download ? '<a href="' + data.download + '" target="_blank" class="work-detail-action"><span class="icon-download"></span></a>' : '';
-                            $('.work-detail .container .icons').append(workYoutube + workGithub + workDownload);
+                            if (data.download) {
+                                console.log(data.download);
+                                $.get('http://dev.adri.info/wp-json/wp/v2/media?include=' + data.download)
+                                    .done(function(media) {
+                                        console.log(media);
+                                        var workDownload = '<a href="' + media[0].source_url + '"><span class="icon-download"></span></a>';
+                                        $('.work-detail .container .icons').append(workYoutube + workGithub + workDownload);
+
+                                    });
+                            } else {
+                                $('.work-detail .container .icons').append(workYoutube + workGithub);
+                            }
                         }
                         $('#back').click(function() {
                             $('.close').trigger('click');

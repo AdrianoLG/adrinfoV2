@@ -44,28 +44,25 @@
                     <h2>Tecnologías</h2>
                     <div class="line"></div>
                     <div class="technologies">
-                    <?php
-                        $args = array(  
-                            'post_type' => 'technologies',
-                            'post_status' => 'publish',
-                            'posts_per_page' => 50,
-                            'orderby' => 'date',
-                            'order' => 'asc'
-                        );
-                    
-                        $loop = new WP_Query( $args ); 
-                            
-                        while ( $loop->have_posts() ) : $loop->the_post(); 
-                            $image = get_field('imagen');
-                                if( $image ): ?>
-                                    <div class="technology">
-                                        <img src="<?= $image['url'] ?>" alt="<?= $image['alt'] ?>" title="<?= $image['title'] ?>">
-                                    </div>
-                            <?php endif;
-                        endwhile;
-                    
-                        wp_reset_postdata(); 
-                    ?>
+<?php
+    $args = array(  
+        'post_type' => 'technologies',
+        'post_status' => 'publish',
+        'posts_per_page' => 50,
+        'orderby' => 'date',
+        'order' => 'asc'
+    );
+    $loop = new WP_Query( $args ); 
+    while ( $loop->have_posts() ) : $loop->the_post(); 
+        $image = get_field('imagen');
+        if( $image ): ?>
+                        <div class="technology">
+                            <img src="<?= $image['url'] ?>" alt="<?= $image['alt'] ?>" title="<?= $image['title'] ?>">
+                        </div>
+<?php 
+        endif;
+    endwhile;
+    wp_reset_postdata(); ?>
                     </div>
                 </div>
             </div>
@@ -75,33 +72,42 @@
                 <h2>Intereses</h2>
                 <div class="line"></div>
                 <div class="row">
-                    <?php
-                        $args = array(  
-                            'post_type' => 'interests',
-                            'post_status' => 'publish',
-                            'posts_per_page' => 50,
-                            'orderby' => 'date',
-                            'order' => 'asc'
-                        );
-                    
-                        $loop = new WP_Query( $args ); 
-                            
-                        while ( $loop->have_posts() ) : $loop->the_post(); 
-                            $interestName = get_the_title();
-                            $interestIcon = get_field('icono');
-                            if( $interestIcon ): ?>
-                                <div class="interest">
-                                    <div>
-                                        <i class="<?= $interestIcon ?>"></i>
-                                    </div>
-                                    <p><?= $interestName ?></p>
-                                </div>
-                        <?php endif;
-                        endwhile;
-                    
-                        wp_reset_postdata(); 
-                    ?>
+<?php
+    $args = array(  
+        'post_type' => 'interests',
+        'post_status' => 'publish',
+        'posts_per_page' => 50,
+        'orderby' => 'date',
+        'order' => 'asc'
+    );
+    $loop = new WP_Query( $args ); 
+    while ( $loop->have_posts() ) : $loop->the_post(); 
+        $interestName = get_the_title();
+        $interestIcon = get_field('icono');
+        if( $interestIcon ): ?>
+                    <div class="interest">
+                        <div>
+                            <i class="<?= $interestIcon ?>"></i>
+                        </div>
+                        <p><?= $interestName ?></p>
+                    </div>
+<?php 
+        endif;
+    endwhile;
+    wp_reset_postdata(); ?>
                 </div>
+<?php
+    $args = array(  
+        'post_type' => 'description',
+        'post_status' => 'publish',
+        'posts_per_page' => 1
+    );
+    $loop = new WP_Query( $args ); 
+    while ( $loop->have_posts() ) : $loop->the_post(); 
+        $description = get_field('descripcion');
+        echo $description;
+    endwhile;
+    wp_reset_postdata(); ?>
             </div>
         </section>
         <section id="works">
@@ -117,35 +123,33 @@
                     </div>
                 </div>
                 <ul class="works">
-                    <?php
-                        $args = array(  
-                            'post_type' => 'works',
-                            'post_status' => 'publish',
-                            'posts_per_page' => 50,
-                            'orderby' => 'date',
-                            'order' => 'desc'
-                        );
-                    
-                        $loop = new WP_Query( $args ); 
-                            
-                        while ( $loop->have_posts() ) : $loop->the_post(); 
-                            $workId = get_the_ID();
-                            $workName = get_the_title();
-                            $workType = get_field('tipo');
-                            $workClass = get_field('clase');
-                            $workIcon = get_field('icono');
-                            if( $workIcon ): ?>
-                                <li class="work <?= $workClass ?>" data-id="<?= $workId ?>">
-                                    <div class="hover-text">
-                                        <h3><?= $workName ?></h3>
-                                        <p><?= $workType ?></p>
-                                    </div>
-                                    <img src="<?= $workIcon['url'] ?>" alt="<?= $workIcon['alt'] ?>" title="<?= $workIcon['title'] ?>">
-                                </li>
-                        <?php endif;
-                        endwhile;
-                        wp_reset_postdata(); 
-                    ?>
+<?php
+    $args = array(  
+        'post_type' => 'works',
+        'post_status' => 'publish',
+        'posts_per_page' => 50,
+        'orderby' => 'date',
+        'order' => 'desc'
+    );
+    $loop = new WP_Query( $args ); 
+    while ( $loop->have_posts() ) : $loop->the_post(); 
+        $workId = get_the_ID();
+        $workName = get_the_title();
+        $workType = get_field('tipo');
+        $workClass = get_field('clase');
+        $workIcon = get_field('icono');
+        if( $workIcon ): ?>
+                    <li class="work <?= $workClass ?>" data-id="<?= $workId ?>" aria-label="<?= $workName ?>">
+                        <div class="hover-text">
+                            <h3><?= $workName ?></h3>
+                            <p><?= $workType ?></p>
+                        </div>
+                        <img src="<?= $workIcon['url'] ?>" alt="<?= $workIcon['alt'] ?>" title="<?= $workIcon['title'] ?>">
+                    </li>
+    <?php 
+        endif;
+    endwhile;
+    wp_reset_postdata(); ?>
                 </ul>
             </div>
         </section>
@@ -154,53 +158,53 @@
                 <div class="container">
                     <div id="quotes-slider" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
-                               <blockquote>
-                                  <p class="quote"><span class="quote-left"></span>La vida cobra sentido cuando se hace de ella una aspiración a no renunciar a nada<span class="quote-right"></span></p>
-                                  <p class="author">José Ortega y Gasset</p>
-                              </blockquote>   
+<?php
+    $args = array(  
+        'post_type' => 'quotes',
+        'post_status' => 'publish',
+        'posts_per_page' => 50,
+        'orderby' => 'date',
+        'order' => 'asc'
+    );
+    $loop = new WP_Query( $args ); 
+    while ( $loop->have_posts() ) : $loop->the_post(); 
+        $quote = get_field('frase');
+        $author = get_field('autor');
+        $active = get_field('activo'); ?>
+                            <div class="carousel-item <?php if ($active): echo 'active'; endif; ?>">
+                                <blockquote>
+                                    <p class="quote"><span class="quote-left"></span><?= $quote ?><span class="quote-right"></span></p>
+                                    <p class="author"><?= $author ?></p>
+                                </blockquote>
                             </div>
-                            <div class="carousel-item">
-                              <p class="quote"><span class="quote-left"></span>Quien pretenda una felicidad y sabiduría constantes, deberá acomodarse a frecuentes cambios<span class="quote-right"></span></p>
-                              <div class="author">Confucio</div>
-                            </div>
-                            <div class="carousel-item">
-                              <p class="quote"><span class="quote-left"></span>Si buscas resultados diferentes, no hagas siempre lo mismo<span class="quote-right"></span></p>
-                              <div class="author">Albert Einstein</div>
-                            </div>
-                            <div class="carousel-item">
-                              <p class="quote"><span class="quote-left"></span>El saber no es suficiente, debemos aplicarlo. El querer no es suficiente, debemos hacer<span class="quote-right"></span></p>
-                              <div class="author">Bruce Lee</div>
-                            </div>
-                            <div class="carousel-item">
-                              <p class="quote"><span class="quote-left"></span>Cuando el carro se ha roto, muchos os dirán por dónde no se debía pasar<span class="quote-right"></span></p>
-                              <div class="author">Proverbio turco</div>
-                            </div>
-                          </div>
-                          <ol class="carousel-indicators">
-                              <li data-target="#quotes-slider" data-slide-to="0" class="active"></li>
-                              <li data-target="#quotes-slider" data-slide-to="1"></li>
-                              <li data-target="#quotes-slider" data-slide-to="2"></li>
-                              <li data-target="#quotes-slider" data-slide-to="3"></li>
-                              <li data-target="#quotes-slider" data-slide-to="4"></li>
-                          </ol>
+<?php
+    endwhile;
+    wp_reset_postdata(); ?>
+                            <ol class="carousel-indicators">
+                                <li data-target="#quotes-slider" data-slide-to="0" class="active"></li>
+                                <li data-target="#quotes-slider" data-slide-to="1"></li>
+                                <li data-target="#quotes-slider" data-slide-to="2"></li>
+                                <li data-target="#quotes-slider" data-slide-to="3"></li>
+                                <li data-target="#quotes-slider" data-slide-to="4"></li>
+                            </ol>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contact">
+            <div class="container">
+                <h2>Contacto</h2>
+                <div class="line"></div>
+                <div class="container">
+                    <div class="form-container">
+                        <div class="contact-form" action="#contact" method="POST" >
+                            <p>No dudes en ponerte en contacto conmigo, ya sea para ofrecerme trabajo, colaboración o simplemente dejarme unas líneas.</p>
+                            <?= do_shortcode('[contact-form-7 id="10" title="Contact form"]') ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
-    <section id="contact">
-        <div class="container">
-            <h2>Contacto</h2>
-            <div class="line"></div>
-            <div class="container">
-                <div class="form-container">
-                    <form class="contact-form" action="#contact" method="POST" >
-                        <p>Escríbeme y demuestra que no eres un robot con el test de Touring inverso</p>
-                        <?= do_shortcode('[contact-form-7 id="10" title="Contact form 1"]'); ?>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
 <?php get_footer() ?>

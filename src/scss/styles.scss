@@ -30,6 +30,12 @@ header {
     transition: .3s padding ease-in, .3s background ease-in;
     top: 30vh;
     z-index: 3;
+    &.mobileMenu {
+        z-index: 5;
+        #navbarSupportedContent {
+            background: $black;
+        }
+    }
     &.on {
         @extend .position-fixed;
         top: 0;
@@ -49,6 +55,10 @@ header {
     }
     #navbarSupportedContent {
         justify-content: space-evenly;
+        background: $black;
+        @media screen and (min-width: 992px) {
+            background: transparent;
+        }
     }
     .navbar-brand {
         @extend .d-none;
@@ -117,6 +127,7 @@ label {
 }
 #interests {
     background: $white;
+    border-bottom: 1px solid $utilColor1;
     color: $blackText;
 }
 #navbarSupportedContent {
@@ -182,8 +193,11 @@ label {
         @extend .mr-3;
     }
 }
+.carousel, 
+.carousel-inner {
+    min-height: 14em;
+}
 .carousel {
-    min-height: 10em;
     .carousel-item {
         p {
             @extend .text-center;
@@ -308,7 +322,7 @@ label {
 .interest {
     @extend .col-sm-3; 
     @extend .col-6;
-    @extend .mb-4;
+    @extend .mb-5;
     @media screen and (min-width: 576px) {
         margin-bottom: 0;
     }
@@ -396,6 +410,9 @@ label {
         }
     }
 }
+.grecaptcha-badge {
+    display: none;
+}
 .hover-text {
     @extend .d-none;
     @extend .p-2;
@@ -425,6 +442,9 @@ label {
 .main-title {
     @extend .position-relative;
     z-index: 4;
+}
+.mt {
+    @extend .mt-5;
 }
 .navbar {
     @extend .w-100;
@@ -606,9 +626,10 @@ label {
     .project-title {
         @include font-size($fontSize1);
         color: $primaryColor;
+        margin-top: 3rem;
     }
     .row {
-        margin: 3rem 0;
+        margin: 0;
     }
 }
 .work-text {
