@@ -3,7 +3,7 @@
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <title>Adriano LG</title>
-    <meta keywords="Adriano Lorenzo González, desarrollador web, web developer, A Coruña, Madrid">
+    <meta keywords="Adriano Lorenzo González, Fullstack Software Engineer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php wp_head(); ?>
 </head>
@@ -20,4 +20,5 @@
                 </div>
             </div>
           </nav>
+
     </header>
