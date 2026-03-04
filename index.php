@@ -4,7 +4,7 @@
             <div class="overlay">
                 <div class="main-title">
                     <h1><span class="color-primary">Adriano</span> Lorenzo González</span></h1>
-                    <p class="slogan">Desarrollador web fullstack</p>
+                    <p class="slogan">Fullstack Software Engineer</p>
                 </div>
                 <a id="goToPage" href="#about" class="go-to-page"></a>
             </div>
@@ -19,7 +19,7 @@
                     </div>
                     <div class="about-text">
                         <p class="quote"><span class="quote-left"></span> Puedes llegar a cualquier lado, siempre que andes lo suficiente <span class="quote-right"></span></p>
-                        <p class="intro">Hola, soy Adriano: filósofo, diseñador, desarrollador... <strong><br>explorador de nuevos mundos</strong>.</p>
+                        <p class="intro">Hola, soy Adriano: filósofo, diseñador, desarrollador, ingeniero... <strong><br>explorador de nuevos mundos</strong>.</p>
                         <ul class="about-list">
                             <li>
                                 <span class="icon-circle"></span>
@@ -32,6 +32,10 @@
                             <li>
                                 <span class="icon-circle"></span>
                                 <strong>Técnico Superior en Desarrollo de Aplicaciones Multiplataforma</strong>
+                            </li>
+                            <li>
+                                <span class="icon-circle"></span>
+                                <strong>Graduado en Ingeniería Informática (Ingeniería del Software)</strong>
                             </li>
                         </ul>
                     </div>
@@ -207,4 +211,5 @@
             </div>
         </section>
     </main>
+
 <?php get_footer() ?>
